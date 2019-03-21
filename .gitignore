@@ -1,0 +1,16 @@
+# ide(sublime & phpstorm project files)
+.idea/
+*.iml
+*.sublime-project
+*.sublime-workspace
+
+# Mac DS_Store Files
+.DS_Store
+out/
+target/
+*.class
+
+sms.properties
+
+logs/
+*.log
