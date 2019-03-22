@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+    <!-- Spring整合Mybatis -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/crm?useUnicode=true&amp;characterEncoding=utf-8"/>
+        <property name="username" value="root"/>
+        <property name="password" value="root"/>
+    </bean>
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="typeAliasesPackage" value="com.csthink.crm.entity"/>
+    </bean>
+    <!--  查找类路径下的映射器并自动将它们创建成 MapperFactoryBean -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!-- 为映射器接口文件设置基本的包路径，可以使用分号或逗号作为分隔符设置多于一个的包路径-->
+        <!-- com.csthink.crm.dao 这里对应的就是 resources目录下的mapper文件中声明的 namespace -->
+        <property name="basePackage" value="com.csthink.crm.dao"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+    <!-- 声明式事务 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!-- spring IOC开启全局扫描 -->
+    <context:component-scan base-package="com.csthink.crm"/>
+</beans>
