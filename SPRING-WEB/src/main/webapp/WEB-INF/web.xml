@@ -17,6 +17,14 @@
         </init-param>
     </filter>
 
+    <jsp-config>
+        <jsp-property-group>
+            <url-pattern>*.jsp</url-pattern>
+            <include-prelude>/WEB-INF/views/global.jsp</include-prelude>
+        </jsp-property-group>
+    </jsp-config>
+
+
     <filter-mapping>
         <filter-name>EncodingFilter</filter-name>
         <url-pattern>/*</url-pattern>

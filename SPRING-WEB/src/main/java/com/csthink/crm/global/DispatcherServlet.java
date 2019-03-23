@@ -19,7 +19,6 @@ public class DispatcherServlet extends GenericServlet {
 
     @Override
     public void init() throws ServletException {
-        System.out.println("开始");
         super.init();
         applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
     }
@@ -44,7 +43,6 @@ public class DispatcherServlet extends GenericServlet {
 
         // 获取请求url "employee/add.do",去掉开头的斜线
         String path = request.getServletPath().substring(1);
-        System.out.println(path);
         int index = path.indexOf("/");
         String beanName;
         String methodName;
