@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="/css/c3/c3.min.css"/>
     <link rel="stylesheet" href="/css/bootstrap-datepicker3.min.css">
     <link rel="stylesheet" href="/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="/css/dropify.min.css">
+    <link rel="stylesheet" href="/css/sweetalert.css">
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="/css/site.min.css">
 </head>
@@ -100,7 +102,7 @@
                         <li>
                             <a href="javascript:void(0);" class="has-arrow"><i class="icon-users"></i><span>人员管理</span></a>
                             <ul>
-                                <li><a href="/employe/list.do">员工管理</a></li>
+                                <li><a href="/employee/list.do">员工管理</a></li>
                                 <li><a href="/department/list.do">部门管理</a></li>
                              </ul>
                         </li>
