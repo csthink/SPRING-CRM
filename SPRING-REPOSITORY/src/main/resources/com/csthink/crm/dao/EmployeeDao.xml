@@ -31,6 +31,7 @@
         `password`,
         `real_name`,
         `birth_date`,
+        `photo`,
         `gender`,
         `hire_date`,
         `dept_id`,
@@ -66,18 +67,18 @@
     </delete>
 
     <update id="update" parameterType="Employee">
-        UPDATE `employee` SET
+        UPDATE `employee`
         <set>
-            <if test="null != username">username=#{username}</if>
-            <if test="null != phone">phone=#{phone}</if>
-            <if test="null != password">password=#{password}</if>
-            <if test="null != realName">real_name=#{realName}</if>
-            <if test="null != birthDate">birth_date=#{birthDate}</if>
-            <if test="null != photo">photo=#{photo}</if>
-            <if test="null != gender">gender=#{gender}</if>
-            <if test="null != hireDate">hire_date=#{hireDate}</if>
-            <if test="null != deptId">dept_id=#{deptId}</if>
-            <if test="null != createTime">create_time=#{createTime}</if>
+            <if test="null != username">username=#{username},</if>
+            <if test="null != phone">phone=#{phone},</if>
+            <if test="null != password">password=#{password},</if>
+            <if test="null != realName">real_name=#{realName},</if>
+            <if test="null != birthDate">birth_date=#{birthDate},</if>
+            <if test="null != photo">photo=#{photo},</if>
+            <if test="null != gender">gender=#{gender},</if>
+            <if test="null != hireDate">hire_date=#{hireDate},</if>
+            <if test="null != deptId">dept_id=#{deptId},</if>
+            <if test="null != createTime">create_time=#{createTime},</if>
             <if test="null != updateTime">update_time=#{updateTime}</if>
         </set>
         where `id` = #{id}

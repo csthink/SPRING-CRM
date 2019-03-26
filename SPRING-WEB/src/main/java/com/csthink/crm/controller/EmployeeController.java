@@ -39,6 +39,14 @@ public class EmployeeController {
 
     private String viewPath = "/WEB-INF/views/biz/employee/";
 
+    /**
+     * 员工列表
+     *
+     * @param request  HttpServletRequest
+     * @param response HttpServletResponse
+     * @throws ServletException
+     * @throws IOException
+     */
     public void list(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Employee> list = employeeService.getAll();
         request.setAttribute("LIST", list);
@@ -49,12 +57,6 @@ public class EmployeeController {
         List<Department> departments = departmentService.getAll();
         request.setAttribute("DLIST", departments);
         request.getRequestDispatcher(viewPath + "employee_add.jsp").forward(request, response);
-    }
-
-    private String checkCaptcha(String captcha) {
-
-
-        return "";
     }
 
     /**
@@ -101,7 +103,6 @@ public class EmployeeController {
         VerifyCodeUtils.saveToSession(request.getSession(), smsCode, "emp_add_sms");
         JsonUtils.json(response, sendResult);
     }
-
 
     public void add(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -170,4 +171,134 @@ public class EmployeeController {
             System.out.println(e.getMessage());
         }
     }
+
+    public void toEdit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Department> departments = departmentService.getAll();
+        if (StringUtils.isBlank(request.getParameter("id"))) {
+            response.sendRedirect("/WEB-INF/views/error/404.jsp");
+        }
+
+        Integer id = Integer.parseInt(request.getParameter("id"));
+        Employee employee = employeeService.get(id);
+        if (null == employee) {
+            response.sendRedirect("/WEB-INF/views/error/404.jsp");
+        }
+
+        request.setAttribute("DLIST", departments);
+        request.setAttribute("OBJ", employee);
+        request.getRequestDispatcher(viewPath + "employee_edit.jsp").forward(request, response);
+    }
+
+    public void edit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        try {
+            Map<String, String> params = FileUploadUtils.upload(request); // 获取请求参数
+            Map<String, Object> data = new HashMap<>(); // 响应结果
+            System.out.println("controller接收的参数: " + params);
+
+            if (params.size() > 0) {
+                String realName = params.get("real_name");
+                String phone = params.get("phone");
+                String gender = params.get("gender");
+
+                Employee employee = null;
+                try {
+                    employee = employeeService.get(Integer.parseInt(params.get("id")));
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                }
+                if (null == employee) {
+                    data.put("flag", false);
+                    data.put("msg", "员工信息获取失败");
+                    JsonUtils.json(response, data);
+                    return;
+                }
+                System.out.println("查到的对象: " + employee);
+                employee.setRealName(realName);
+                employee.setPhone(phone);
+                employee.setGender(gender);
+
+                Integer deptId = null;
+                Date birthDate = null;
+                Date hireDate = null;
+
+                try {
+                    deptId = Integer.parseInt(params.get("dept_id"));
+                    birthDate = new SimpleDateFormat("yyyy-MM-dd").parse(params.get("birth_date"));
+                    hireDate = new SimpleDateFormat("yyyy-MM-dd").parse(params.get("hire_date"));
+                } catch (NumberFormatException | ParseException e) {
+                    e.printStackTrace();
+                }
+
+                employee.setDeptId(deptId);
+                employee.setBirthDate(birthDate);
+                employee.setHireDate(hireDate);
+
+                if (employeeService.edit(employee) > 0) { // 注册成功
+                    data.put("flag", true);
+                    data.put("msg", "保存成功");
+                } else { // 注册失败
+                    data.put("flag", true);
+                    data.put("msg", "保存失败");
+                }
+
+                JsonUtils.json(response, data);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            // 记录日志
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void detail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Department> departments = departmentService.getAll();
+
+        Integer id = null;
+        try {
+            id = Integer.parseInt(request.getParameter("id"));
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            response.sendRedirect("/WEB-INF/views/error/404.jsp");
+        }
+
+        Employee employee = employeeService.get(id);
+        if (null == employee) {
+            response.sendRedirect("/WEB-INF/views/error/404.jsp");
+        }
+
+        request.setAttribute("DLIST", departments);
+        request.setAttribute("OBJ", employee);
+        request.getRequestDispatcher(viewPath + "employee_detail.jsp").forward(request, response);
+    }
+
+    public void remove(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Map<String, Object> data = new HashMap<>(); // 响应结果
+        Integer id = null;
+        try {
+            id = Integer.parseInt(request.getParameter("id"));
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            response.sendRedirect("/WEB-INF/views/error/404.jsp");
+        }
+
+        Employee employee = employeeService.get(id);
+        if (null == employee) {
+            data.put("flag", false);
+            data.put("msg", "员工信息获取失败");
+            JsonUtils.json(response, data);
+            return;
+        }
+
+        if (employeeService.remove(id) > 0) {
+            data.put("flag", true);
+            data.put("msg", "删除成功");
+        } else {
+            data.put("flag", false);
+            data.put("msg", "删除失败");
+        }
+
+        JsonUtils.json(response, data);
+    }
+
 }
