@@ -23,9 +23,9 @@ public interface DepartmentService {
     int remove(Integer id);
 
     /**
-     * 修改部门 部门对象
+     * 修改部门
      *
-     * @param department
+     * @param department 部门对象
      * @return
      */
     int edit(Department department);
