@@ -36,6 +36,7 @@ public class LoginController {
      * @throws IOException
      */
     public void toLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("title", "登录页面");
         request.getRequestDispatcher("/WEB-INF/views/biz/login/login.jsp").forward(request, response);
     }
 
@@ -178,6 +179,7 @@ public class LoginController {
      * @throws IOException
      */
     public void toForgotPassword(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("title", "忘记密码");
         request.getRequestDispatcher("/WEB-INF/views/biz/login/forgot_password.jsp").forward(request, response);
     }
 

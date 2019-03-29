@@ -135,7 +135,12 @@ Validator.prototype.start = function () {
     for (var i = 0, fun; fun = this.rules[i++];) {
         var errorMsg = fun();
         if (errorMsg) {
-           Message.warn(errorMsg);
+           //Message.warn(errorMsg);
+            swal({
+                title: errorMsg,
+                timer: 1200,
+                showConfirmButton: false
+            });
             return false;
         }
     }

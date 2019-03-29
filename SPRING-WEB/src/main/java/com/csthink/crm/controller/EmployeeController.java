@@ -50,12 +50,14 @@ public class EmployeeController {
     public void list(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Employee> list = employeeService.getAll();
         request.setAttribute("LIST", list);
+        request.setAttribute("TITLE", "员工列表");
         request.getRequestDispatcher(viewPath + "employee_list.jsp").forward(request, response);
     }
 
     public void toAdd(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Department> departments = departmentService.getAll();
         request.setAttribute("DLIST", departments);
+        request.setAttribute("TITLE", "添加员工");
         request.getRequestDispatcher(viewPath + "employee_add.jsp").forward(request, response);
     }
 
@@ -187,6 +189,7 @@ public class EmployeeController {
 
         request.setAttribute("DLIST", departments);
         request.setAttribute("OBJ", employee);
+        request.setAttribute("TITLE", "编辑员工");
         request.getRequestDispatcher(viewPath + "employee_edit.jsp").forward(request, response);
     }
 
@@ -269,6 +272,7 @@ public class EmployeeController {
 
         request.setAttribute("DLIST", departments);
         request.setAttribute("OBJ", employee);
+        request.setAttribute("TITLE", employee.getUsername() + "的详情页");
         request.getRequestDispatcher(viewPath + "employee_detail.jsp").forward(request, response);
     }
 

@@ -192,6 +192,7 @@ if (null != emp_edit_form) {
 $(".empRemove").click(function () {
     var emp_id = $(this).attr("data-id");
     var currentRow = $(this).parents("tr");
+
     swal({
         title: "确定删除此员工?",
         text: "此操作将会永久删除该员工",
@@ -200,29 +201,35 @@ $(".empRemove").click(function () {
         confirmButtonColor: "#dc3545",
         confirmButtonText: "确定删除",
         cancelButtonText: "取消",
-        closeOnConfirm: false
-    }, function () {
-        $.ajax({
-            url: "/employee/remove.do",
-            type: "post",
-            data: {id: emp_id},
-            dataType: "json",
-            success: function (data) {
-                console.log(data);
-                var flag = data.flag;
-                var msg = data.msg;
-                if (flag === true) { // 操作成功
-                    swal("已删除!", "该员工已被删除.", "success");
-                    currentRow.remove();
-                } else { // 操作失败
-                    swal("删除失败", msg, "danger");
+        closeOnConfirm: false,
+        closeOnCancel: false
+    }, function (isConfirm) {
+        if (isConfirm) {
+            $.ajax({
+                url: "/employee/remove.do",
+                type: "post",
+                data: {id: emp_id},
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                    var flag = data.flag;
+                    var msg = data.msg;
+                    if (flag === true) { // 操作成功
+                        swal("已删除!", "该员工已被删除.", "success");
+                        currentRow.remove();
+                    } else { // 操作失败
+                        swal("删除失败", msg, "danger");
+                    }
+                },
+                error: function (e) {
+                    console.log(e);
+                    Message.error(e);
                 }
-            },
-            error: function (e) {
-                console.log(e);
-                Message.error(e);
-            }
-        });
+            });
+        } else {
+            swal("已取消删除", "当前员工信息依然完整:)", "error");
+        }
+
     });
 });
 

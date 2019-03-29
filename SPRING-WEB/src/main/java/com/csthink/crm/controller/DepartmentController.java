@@ -21,10 +21,12 @@ public class DepartmentController {
     public void list(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Department> list = departmentService.getAll();
         request.setAttribute("LIST", list);
+        request.setAttribute("TITLE", "部门列表");
         request.getRequestDispatcher("/WEB-INF/views/biz/department/department_list.jsp").forward(request, response);
     }
 
     public void toAdd(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("TITLE", "添加部门");
         request.getRequestDispatcher("/WEB-INF/views/biz/department/department_add.jsp").forward(request, response);
     }
 
@@ -55,6 +57,7 @@ public class DepartmentController {
         Integer id = Integer.parseInt(request.getParameter("id"));
         Department department = departmentService.get(id);
         if (null != department) {
+            request.setAttribute("TITLE", "编辑部门");
             request.setAttribute("OBJ", department);
             request.getRequestDispatcher("/WEB-INF/views/biz/department/department_edit.jsp").forward(request, response);
         } else {

@@ -5,12 +5,12 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-    <title>CRM | 部门列表</title>
+    <title>CRM | ${TITLE}</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <meta name="description" content="">
-    <base href="<%=basePath%>/">
+    <base href="${basepath}/">
     <link rel="shortcut icon" href="/image/favicon.ico" type="image/x-icon">
     <!-- VENDOR CSS -->
     <link rel="stylesheet" href="/css/bootstrap/css/bootstrap.min.css">
@@ -25,7 +25,6 @@
     <link rel="stylesheet" href="/css/site.min.css">
 </head>
 <body class="theme-orange">
-        ${requestUri}
         <%
             if (null != session.getAttribute("USER")) {
                 Employee employee = (Employee) session.getAttribute("USER");

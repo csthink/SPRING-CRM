@@ -24,6 +24,7 @@ public class LogController {
 
         request.setAttribute("LIST", list);
         request.setAttribute("TYPE", "操作日志");
+        request.setAttribute("TITLE", "操作日志");
         request.getRequestDispatcher(path).forward(request, response);
     }
 
@@ -32,6 +33,7 @@ public class LogController {
 
         request.setAttribute("LIST", list);
         request.setAttribute("TYPE", "系统日志");
+        request.setAttribute("TITLE", "系统日志");
         request.getRequestDispatcher(path).forward(request, response);
     }
 
@@ -40,6 +42,7 @@ public class LogController {
 
         request.setAttribute("LIST", list);
         request.setAttribute("TYPE", "登录日志");
+        request.setAttribute("TITLE", "登录日志");
         request.getRequestDispatcher(path).forward(request, response);
     }
 
