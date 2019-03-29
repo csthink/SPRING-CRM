@@ -51,7 +51,7 @@
                 <div class="navbar-right">
                     <div id="navbar-menu">
                         <ul class="nav navbar-nav">
-                            <li><a href="login.html" class="icon-menu"><i class="icon-power"></i></a></li>
+                            <li><a href="/login/logout.do" class="icon-menu"><i class="icon-power"></i></a></li>
                         </ul>
                     </div> <!-- /navbar-menu -->
                 </div> <!-- /navbar-right -->
@@ -87,7 +87,7 @@
                             <li><a href="page-profile.html"><i class="icon-user"></i>我的信息</a></li>
                             <li><a href="javascript:void(0);"><i class="icon-settings"></i>设置</a></li>
                             <li class="divider"></li>
-                            <li><a href="page-login.html"><i class="icon-power"></i>退出系统</a></li>
+                            <li><a href="/login/logout.do"><i class="icon-power"></i>退出系统</a></li>
                         </ul>
                     </div>
                 </div> <!-- /user-account -->

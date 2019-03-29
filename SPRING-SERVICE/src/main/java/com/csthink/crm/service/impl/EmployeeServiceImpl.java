@@ -30,6 +30,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         String password = ""; // DB 中保存的加密密码
         try {
             plainPassword = CommonUtils.generateRandomPassword(6); // 明文密码
+            System.out.println("系统生成的密码: " + plainPassword);
             password = CommonUtils.encryptByMD5(plainPassword);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();

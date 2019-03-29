@@ -21,7 +21,7 @@
     </resultMap>
 
     <sql id="employeeFields">
-        `username`,`phone`,`password`,`real_name`,`birth_date`,`photo`,`gender`,`hire_date`,`dept_id`,`create_time`,`update_time`
+       `id`, `username`,`phone`,`password`,`real_name`,`birth_date`,`photo`,`gender`,`hire_date`,`dept_id`,`create_time`,`update_time`
     </sql>
 
     <sql id="employeeDepartmentFields">
@@ -59,7 +59,7 @@
 
     <insert id="insert" parameterType="Employee" useGeneratedKeys="true">
         INSERT INTO `employee`(<include refid="employeeFields"></include>)
-        VALUES(#{username},#{phone},#{password},#{realName},#{birthDate},#{photo},#{gender},#{hireDate},#{deptId},#{createTime},#{updateTime})
+        VALUES(null, #{username},#{phone},#{password},#{realName},#{birthDate},#{photo},#{gender},#{hireDate},#{deptId},#{createTime},#{updateTime})
     </insert>
 
     <delete id="delete" parameterType="Integer">

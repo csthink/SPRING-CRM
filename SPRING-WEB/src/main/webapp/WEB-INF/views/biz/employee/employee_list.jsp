@@ -45,7 +45,7 @@
                                 <td>
                                     <a href="/employee/toEdit.do?id=${emp.id}" class="btn btn-primary btn">编辑</a>
                                     <a href="/employee/detail.do?id=${emp.id}" class="btn btn-dark btn">详情</a>
-                                    <a href="javascript:void(0)" data-id="${emp.id}" class="btn btn-danger deptRemove">删除</a>
+                                    <a href="javascript:void(0)" data-id="${emp.id}" class="btn btn-danger empRemove">删除</a>
                                 </td>
                             </tr>
                         </c:forEach>

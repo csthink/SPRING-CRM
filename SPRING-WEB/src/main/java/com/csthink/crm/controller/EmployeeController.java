@@ -156,6 +156,7 @@ public class EmployeeController {
                 employee.setHireDate(hireDate);
 
                 if (employeeService.add(employee) > 0) { // 注册成功
+                    request.getSession().removeAttribute("emp_add_sms");
                     data.put("flag", true);
                     data.put("msg", "注册成功");
                 } else { // 注册失败
@@ -194,7 +195,6 @@ public class EmployeeController {
         try {
             Map<String, String> params = FileUploadUtils.upload(request); // 获取请求参数
             Map<String, Object> data = new HashMap<>(); // 响应结果
-            System.out.println("controller接收的参数: " + params);
 
             if (params.size() > 0) {
                 String realName = params.get("real_name");
