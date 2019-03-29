@@ -6,7 +6,7 @@ public class Log {
 
     private Integer id;
 
-    private Integer logType;
+    private String logType;
 
     private String operator;
 
@@ -28,11 +28,11 @@ public class Log {
         this.id = id;
     }
 
-    public Integer getLogType() {
+    public String getLogType() {
         return logType;
     }
 
-    public void setLogType(Integer logType) {
+    public void setLogType(String logType) {
         this.logType = logType;
     }
 

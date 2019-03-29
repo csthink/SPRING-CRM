@@ -1,4 +1,5 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+    <%@ page import="com.csthink.crm.entity.Employee" %>
+        <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!doctype html>
@@ -95,7 +96,7 @@
                 <nav id="left-sidebar-nav" class="sidebar-nav">
                     <ul id="main-menu" class="metismenu">
                         <!-- <li class="header">Main</li> -->
-                        <li class="active"><a href="index.html"><i class="icon-logout"></i><span>退出系统</span></a></li>
+                        <li class="active"><a href="/login/logout.do"><i class="icon-logout"></i><span>退出系统</span></a></li>
 
                         <li class="header">系统管理</li>
 
@@ -110,9 +111,9 @@
                         <li>
                             <a href="javascript:void(0);" class="has-arrow"><i class="icon-doc"></i><span>日志信息</span></a>
                             <ul>
-                                <li><a href="ui-bootstrap.html">操作日志</a></li>
-                                <li><a href="ui-typography.html">登录日志</a></li>
-                                <li><a href="ui-colors.html">系统日志</a></li>
+                                <li><a href="/log/operationLog.do">操作日志</a></li>
+                                <li><a href="/log/loginLog.do">登录日志</a></li>
+                                <li><a href="/log/systemLog.do">系统日志</a></li>
                             </ul>
                         </li>
 
@@ -120,7 +121,7 @@
                             <a href="javascript:void(0);" class="has-arrow"><i class="icon-home"></i><span>个人中心</span></a>
                             <ul>
                                 <li><a href="forms-basic.html">个人信息</a></li>
-                                <li><a href="forms-advanced.html">修改密码</a></li>
+                                <li><a href="/login/toForgotPassword.do">修改密码</a></li>
                             </ul>
                         </li>
 

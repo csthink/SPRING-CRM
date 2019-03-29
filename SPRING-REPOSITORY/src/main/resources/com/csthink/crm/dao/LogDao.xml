@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.4//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.csthink.crm.dao.LogDao">
+    <resultMap id="logMap" type="Log">
+        <id property="id" column="id" javaType="Integer"/>
+        <result property="logType" column="log_type" javaType="String"/>
+        <result property="operator" column="operator" javaType="String"/>
+        <result property="module" column="module" javaType="String"/>
+        <result property="action" column="action" javaType="String"/>
+        <result property="requestIp" column="request_ip" javaType="String"/>
+        <result property="requestResult" column="request_result" javaType="String"/>
+        <result property="createTime" column="create_time" javaType="Date"/>
+    </resultMap>
+
+    <sql id="logFields">
+        `id`,`log_type`,`operator`,`module`,`action`,`request_ip`,`request_result`,`create_time`
+    </sql>
+
+    <insert id="insert" parameterType="Log" useGeneratedKeys="true">
+        INSERT INTO `log`(<include refid="logFields"></include>) VALUES(null,#{logType},#{operator},#{module},#{action},#{requestIp},#{requestResult},#{createTime})
+    </insert>
+
+    <select id="selectByType" parameterType="String" resultMap="logMap">
+        SELECT <include refid="logFields"></include> FROM `log` WHERE `log_type`=#{logType}
+    </select>
+
+</mapper>
