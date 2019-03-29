@@ -115,7 +115,7 @@ public class EmployeeController {
                 String realName = params.get("real_name");
                 String phone = params.get("phone");
                 String gender = params.get("gender");
-                String photo = !StringUtils.isBlank(params.get("fileName")) ? (String) params.get("fileName") : "default-photo.jpg";
+                String photo = !StringUtils.isBlank(params.get("fileName")) ? params.get("fileName") : "default-photo.jpg";
                 String captcha = params.get("captcha");
                 String smsCode = params.get("smsCode");
 

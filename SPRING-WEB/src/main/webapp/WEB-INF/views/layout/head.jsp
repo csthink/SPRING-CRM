@@ -1,5 +1,5 @@
-    <%@ page import="com.csthink.crm.entity.Employee" %>
-        <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@ page import="com.csthink.crm.entity.Employee" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!doctype html>
@@ -25,6 +25,13 @@
     <link rel="stylesheet" href="/css/site.min.css">
 </head>
 <body class="theme-orange">
+        ${requestUri}
+        <%
+            if (null != session.getAttribute("USER")) {
+                Employee employee = (Employee) session.getAttribute("USER");
+                request.setAttribute("employee", employee);
+            }
+        %>
     <!-- Page Loader -->
     <div class="page-loader-wrapper">
         <div class="loader">
@@ -78,15 +85,15 @@
 
                 <div class="user-account">
                     <div class="user_div">
-                        <img src="/image/user.png" class="user-photo" alt="User Profile Picture">
+                        <img src="/upload/${employee.photo}" class="user-photo" alt="User Profile Picture">
                     </div>
 
                     <div class="dropdown">
-                        <span>Welcome,</span>
-                        <a href="javascript:void(0);" class="dropdown-toggle user-name" data-toggle="dropdown"><strong>Admin</strong></a>
+                        <span>欢迎,</span>
+                        <a href="javascript:void(0);" class="dropdown-toggle user-name" data-toggle="dropdown"><strong>${employee.username}</strong></a>
                         <ul class="dropdown-menu dropdown-menu-right account vivify flipInY">
-                            <li><a href="page-profile.html"><i class="icon-user"></i>我的信息</a></li>
-                            <li><a href="javascript:void(0);"><i class="icon-settings"></i>设置</a></li>
+<%--                            <li><a href=""><i class="icon-user"></i>我的信息</a></li>--%>
+<%--                            <li><a href=""><i class="icon-settings"></i>设置</a></li>--%>
                             <li class="divider"></li>
                             <li><a href="/login/logout.do"><i class="icon-power"></i>退出系统</a></li>
                         </ul>
@@ -100,20 +107,27 @@
 
                         <li class="header">系统管理</li>
 
-                        <li>
-                            <a href="javascript:void(0);" class="has-arrow"><i class="icon-users"></i><span>人员管理</span></a>
+                        <li class="<c:out value="${requestUri.contains('/employee/') ? 'active' : ''}"/>">
+                            <a href="javascript:void(0);" class="has-arrow"><i class="icon-users"></i><span>员工管理</span></a>
                             <ul>
-                                <li><a href="/employee/list.do">员工管理</a></li>
-                                <li><a href="/department/list.do">部门管理</a></li>
+                                <li class="<c:out value="${requestUri.contains('/employee/list.do') ? 'active' : ''}"/>"><a href="/employee/list.do">员工列表</a></li>
+                                <li class="<c:out value="${requestUri.contains('/employee/toAdd.do') ? 'active' : ''}"/>"><a href="/employee/toAdd.do">添加员工</a></li>
                              </ul>
                         </li>
+                        <li class="<c:out value="${requestUri.contains('/department/') ? 'active' : ''}"/>">
+                            <a href="javascript:void(0);" class="has-arrow"><i class="icon-users"></i><span>部门管理</span></a>
+                            <ul>
+                                <li class="<c:out value="${requestUri.contains('/department/list.do') ? 'active' : ''}"/>"><a href="/department/list.do">部门列表</a></li>
+                                <li class="<c:out value="${requestUri.contains('/department/toAdd.do') ? 'active' : ''}"/>"><a href="/department/toAdd.do">添加部门</a></li>
+                            </ul>
+                        </li>
 
-                        <li>
+                        <li class="<c:out value="${requestUri.contains('/log/') ? 'active' : ''}"/>">
                             <a href="javascript:void(0);" class="has-arrow"><i class="icon-doc"></i><span>日志信息</span></a>
                             <ul>
-                                <li><a href="/log/operationLog.do">操作日志</a></li>
-                                <li><a href="/log/loginLog.do">登录日志</a></li>
-                                <li><a href="/log/systemLog.do">系统日志</a></li>
+                                <li class="<c:out value="${requestUri.contains('/log/operationLog.do') ? 'active' : ''}"/>"><a href="/log/operationLog.do">操作日志</a></li>
+                                <li class="<c:out value="${requestUri.contains('/log/loginLog.do') ? 'active' : ''}"/>"><a href="/log/loginLog.do">登录日志</a></li>
+                                <li class="<c:out value="${requestUri.contains('/log/systemLog.do') ? 'active' : ''}"/>" ><a href="/log/systemLog.do">系统日志</a></li>
                             </ul>
                         </li>
 

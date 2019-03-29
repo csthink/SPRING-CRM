@@ -12,7 +12,7 @@ import java.util.List;
 @Service("logService")
 public class LogServiceImpl implements LogService {
 
-    private String SYSTEM_LOG = "系统 ";
+    private String SYSTEM_LOG = "系统";
     private String LOGIN_LOG = "登录";
     private String OPERATION_LOG = "操作";
 

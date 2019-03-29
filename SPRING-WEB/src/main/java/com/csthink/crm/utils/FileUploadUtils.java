@@ -22,7 +22,8 @@ public class FileUploadUtils {
         // 定义一个Map集合用于保存接收到的数据:
         Map<String, String> resultMap = new HashMap<>();
         // 获取文件上传路径,将上传的文件存放于WEB-INF目录下，不允许外界直接访问，保证上传文件的安全
-        String savePath = request.getServletContext().getRealPath("/WEB-INF/upload");
+//        String savePath = request.getServletContext().getRealPath("/WEB-INF/upload");
+        String savePath = request.getServletContext().getRealPath("/upload");
         // 上传时生成的临时文件保存目录
 //        String tempPath = request.getServletContext().getRealPath("/WEB-INF/temp");
         File file = new File(savePath);
