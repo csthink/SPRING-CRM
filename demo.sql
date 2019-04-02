@@ -1,69 +1,70 @@
 DROP DATABASE IF EXISTS crm;
-CREATE DATABASE IF NOT EXISTS crm;
+
+CREATE DATABASE crm;
 USE crm;
 
-DROP TABLE IF EXISTS `department`, `employe`, `dept_emp`, `log`, `sms`;
+DROP TABLE IF EXISTS `department`, `employee`, `dept_emp`, `log`, `sms`;
 
 SET default_storage_engine = InnoDB;
 
 CREATE TABLE `department` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '部门编号',
-  `dept_name` varchar(40) CHARACTER SET utf8 NOT NULL COMMENT '部门名称',
+  `id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '部门编号',
+  `dept_name` VARCHAR(40) NOT NULL COMMENT '部门名称',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='部门信息表';
 
 CREATE TABLE `employee` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '员工编号',
-  `username` varchar(20) CHARACTER SET utf8mb4 NOT NULL COMMENT '用户名',
-  `phone` char(11) CHARACTER SET utf8mb4 NOT NULL COMMENT '手机号',
-  `password` char(32) CHARACTER SET utf8mb4 NOT NULL COMMENT '密码',
-  `real_name` varchar(20) CHARACTER SET utf8mb4 NOT NULL DEFAULT '' COMMENT '姓名',
-  `birth_date` date NOT NULL COMMENT '生日',
-  `photo` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'photo-default.jpg' COMMENT '员工头像',
-  `gender` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '性别 0保密,1男,2女,',
-  `hire_date` date NOT NULL COMMENT '入职日期',
-  `dept_id` int(11) unsigned NOT NULL COMMENT '部门编号',
-  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  `id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '员工编号',
+  `username` VARCHAR (20) NOT NULL COMMENT '用户名',
+  `phone` CHAR (11) NOT NULL COMMENT '手机号',
+  `password` CHAR (32) NOT NULL COMMENT '密码',
+  `real_name` VARCHAR (20) NOT NULL DEFAULT '' COMMENT '姓名',
+  `birth_date` DATE NOT NULL COMMENT '生日',
+  `photo` VARCHAR (40) NOT NULL DEFAULT 'photo-default.jpg' COMMENT '员工头像',
+  `gender` TINYINT(1) UNSIGNED NOT NULL DEFAULT '0' COMMENT '性别 0保密,1男,2女,',
+  `hire_date` DATE NOT NULL COMMENT '入职日期',
+  `dept_id` INT(11) UNSIGNED NOT NULL COMMENT '部门编号',
+  `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `uni_username` (`username`) USING BTREE,
   UNIQUE KEY `uk_phone` (`phone`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='员工信息表';
 
 CREATE TABLE `dept_emp` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '记录编号',
-  `emp_id` int(11) unsigned NOT NULL COMMENT '员工编号',
-  `dept_id` int(11) unsigned NOT NULL COMMENT '部门编号',
-  `from_date` date NOT NULL COMMENT '部门起始工作时间',
-  `end_date` date NOT NULL COMMENT '部门截止工作时间',
-  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '记录创建时间',
-  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '记录修改时间',
+  `id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '记录编号',
+  `emp_id` INT(11) UNSIGNED NOT NULL COMMENT '员工编号',
+  `dept_id` INT(11) UNSIGNED NOT NULL COMMENT '部门编号',
+  `from_date` DATE NOT NULL COMMENT '部门起始工作时间',
+  `end_date` DATE NOT NULL COMMENT '部门截止工作时间',
+  `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '记录创建时间',
+  `update_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '记录修改时间',
   PRIMARY KEY (`id`) USING BTREE,
   KEY `idx_emp_dept` (`emp_id`,`dept_id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='部门员工关系表';
 
 CREATE TABLE `log` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `log_type` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '日志类型 1 系统日志，2登录日志 3 操作日志',
-  `operator` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '操作人员',
-  `module` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '操作模块',
-  `action` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '操作行为',
-  `request_ip` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '请求ip',
-  `request_result` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '请求结果',
-  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '操作时间',
+  `id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `log_type` VARCHAR(10) NOT NULL COMMENT '日志类型 1 系统日志，2登录日志 3 操作日志',
+  `operator` VARCHAR(20) NOT NULL COMMENT '操作人员',
+  `module` VARCHAR(50) NOT NULL COMMENT '操作模块',
+  `action` VARCHAR(50) NOT NULL COMMENT '操作行为',
+  `request_ip` VARCHAR(20) NOT NULL COMMENT '请求ip',
+  `request_result` VARCHAR(100) NOT NULL COMMENT '请求结果',
+  `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '操作时间',
   PRIMARY KEY (`id`),
   KEY `idx_log_type` (`log_type`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='日志记录表';
 
 
 CREATE TABLE `sms` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '短信编号',
-  `phone` char(11) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '手机号',
-  `content` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '短信内容',
-  `send_status` tinyint(1) unsigned NOT NULL COMMENT '状态: 0发送成功, 1提交成功，2.提交失败 3 发送失败',
-  `send_result` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '发送结果',
-  `channel` tinyint(1) unsigned NOT NULL COMMENT '发送渠道: 1 榛子云',
-  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '发送时间',
+  `id` BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '短信编号',
+  `phone` CHAR(11) NOT NULL COMMENT '手机号',
+  `content` VARCHAR (255) NOT NULL COMMENT '短信内容',
+  `send_status` TINYINT(1) UNSIGNED NOT NULL COMMENT '状态: 0发送成功, 1提交成功，2.提交失败 3 发送失败',
+  `send_result` VARCHAR (200) NOT NULL COMMENT '发送结果',
+  `channel` TINYINT(1) UNSIGNED NOT NULL COMMENT '发送渠道: 1 榛子云',
+  `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '发送时间',
   PRIMARY KEY (`id`),
   KEY `idx_phone` (`phone`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='短信表';
