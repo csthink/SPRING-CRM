@@ -78,7 +78,6 @@
             <if test="null != gender">gender=#{gender},</if>
             <if test="null != hireDate">hire_date=#{hireDate},</if>
             <if test="null != deptId">dept_id=#{deptId},</if>
-            <if test="null != createTime">create_time=#{createTime},</if>
             <if test="null != updateTime">update_time=#{updateTime}</if>
         </set>
         where `id` = #{id}
