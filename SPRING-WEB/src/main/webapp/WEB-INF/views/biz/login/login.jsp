@@ -42,7 +42,7 @@
                 <form class="form-auth-small m-t-20" id="login-form" novalidate>
                     <div class="form-group">
                         <label for="username" class="control-label sr-only">用户名</label>
-                        <input type="email" class="form-control round" id="username" name="username" value="" placeholder="请输入员工账号">
+                        <input type="text" class="form-control round" id="username" name="username" value="" placeholder="请输入员工账号">
                     </div>
                     <div class="form-group">
                         <label for="password" class="control-label sr-only">密码</label>
