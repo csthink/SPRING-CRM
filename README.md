@@ -4,11 +4,10 @@
 系统登录账号: csthink 密码: 111
 
 
-![toLogin](SPRING-WEB/src/main/webapp/image/shortcut/login.png)
+![toLogin](https://images.csthink.com/login.png)
 
 
-![employee](SPRING-WEB/src/main/webapp/image/shortcut/employee.png)
+![employee](https://images.csthink.com/employee.png)
 
 
-![log](SPRING-WEB/src/main/webapp/image/shortcut/log.png)
-
+![log](https://images.csthink.com/log.png)
